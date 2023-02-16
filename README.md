@@ -10,7 +10,9 @@ Besides the query itself, other commands are:
 >purge the log contents
 
 ---
-The Gpt API key is read from environ variable GPTKEY
+
+### The Gpt API key is read from environ variable GPTKEY
+
 ---
 
 Python 3.X requires: termcolor and openai modules
