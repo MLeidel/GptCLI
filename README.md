@@ -9,3 +9,5 @@ Besides the query itself, other commands are:
 -  clear   
 >purge the log contents
 
+---
+The Gpt API key is read from environ variable GPTKEY
