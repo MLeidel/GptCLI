@@ -109,10 +109,10 @@ while True:
     continue
 
   response = openai.Completion.create(
-    model="text-davinci-003",
+    model="gpt-3.5-turbo",
     prompt=querytext.strip(),
     temperature=0.7,
-    max_tokens=500,
+    max_tokens=1500,
     top_p=1,
     frequency_penalty=0,
     presence_penalty=0
