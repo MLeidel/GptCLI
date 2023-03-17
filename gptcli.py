@@ -108,15 +108,10 @@ while True:
           print(line, end='')
     continue
 
-  response = openai.Completion.create(
-    model="gpt-3.5-turbo",
-    prompt=querytext.strip(),
-    temperature=0.7,
-    max_tokens=1500,
-    top_p=1,
-    frequency_penalty=0,
-    presence_penalty=0
+  response = openai.ChatCompletion.create(
+      model="gpt-3.5-turbo",
+      messages = [{"role": "user", "content" : querytext.strip()}]
   )
-  output = response["choices"][0]["text"]
+  output = response['choices'][0]['message']['content']
   cprint(output, 'green', attrs=['bold',]) # 'reverse'
   printlog(querytext, output)
