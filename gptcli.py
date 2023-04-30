@@ -38,16 +38,11 @@ prompt = ["Sup?",
 "Wasuuuuup",
 "Wazzup?",
 "Whassup?",
-"What’s been good?",
 "What’s cookin’?",
 "What’s crackin’?",
-"What’s good?",
 "What’s happening?",
 "What’s shakin’?",
 "What’s the buzz?",
-"What’s the deal?",
-"What’s the go?",
-"What’s the good word?",
 "What’s the happenin’?",
 "What’s the haps?",
 "What’s the haps?",
@@ -63,14 +58,13 @@ prompt = ["Sup?",
 "Yo, what’s the buzz?",
 "Yo, what’s the deal?",
 "Yo, what’s the haps?",
-"Yo, what’s the word?",
-"‘sup?"]
+"Yo, what’s the word?"]
 
 now = datetime.datetime.now()
 
 def printlog(msg, out):
   with open("gptlog.txt", "a") as flog:
-    flog.write(str(now.strftime("%Y-%m-%d %H:%M:%S")))
+    flog.write(str(now.strftime("%Y-%m-%d %H:%M:%S ")))
     flog.write(msg + "\n>>>")
     flog.write(out + "\n--------------------------\n\n")
 
@@ -81,17 +75,21 @@ Python CLI for OpenAI's GptChat
 Just Hit Enter to EXIT
 '''
 
-cprint(openmsg, 'green', attrs=['bold', 'reverse'])
-
 while True:
-  inx = random.randint(0,53)
-  print()
-  quest = "gptcli: " + prompt[inx] + " "
+# check for command-line query
+  if len(sys.argv) > 1:
+    querytext = sys.argv[1]
+    openai.api_key = os.environ.get("GPTKEY")
+  else:
+    cprint(openmsg, 'green', attrs=['bold', 'reverse'])
+    inx = random.randint(0,48)
+    print()
+    quest = "gptcli: " + prompt[inx] + " "
 
-  openai.api_key = os.environ.get("GPTKEY")
+    openai.api_key = os.environ.get("GPTKEY")
 
-  cprint(quest, 'white', attrs=['bold',])
-  querytext = input().strip()
+    cprint(quest, 'white', attrs=['bold',])
+    querytext = input().strip()
 
   if querytext == "bye":
     sys.exit()
@@ -110,8 +108,12 @@ while True:
 
   response = openai.ChatCompletion.create(
       model="gpt-3.5-turbo",
+      # model="gpt-4",
       messages = [{"role": "user", "content" : querytext.strip()}]
   )
   output = response['choices'][0]['message']['content']
   cprint(output, 'green', attrs=['bold',]) # 'reverse'
   printlog(querytext, output)
+
+  if len(sys.argv) > 1:
+    break  # exit the while loop

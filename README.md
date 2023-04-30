@@ -1,9 +1,25 @@
 # GptCLI
-Console program to access Gpt openAI Completion engine text-davinci-003
+
+Console program to access Gpt openAI Completion engine gpt-3.5-turbo
+
+
+Execute like:
+
+```python
+? python3 gptcli.py
+
+#   program loops until user exits
+
+? python3 gptcli.py "What percentage of people have pets?"
+
+#   program exits after printing response
+
+```
+
 
 Besides the query itself, other commands are:  
 -  bye     
->or just hit Enter key to exit
+>program exits (or just hit Enter key to exit)
 -  log     
 >print out the log contents to the console
 -  clear   
@@ -11,8 +27,9 @@ Besides the query itself, other commands are:
 
 ---
 
-### The Gpt API key is read from environ variable GPTKEY
+The _Gpt API key_ must be set up in an  
+environment variable called 'GPTKEY'
 
 ---
 
-Python 3.X requires: termcolor and openai modules
+moduals required: termcolor and openai modules
