@@ -8,15 +8,24 @@ Execute like:
 ```python
 ? python3 gptcli.py
 
-#   program loops until user exits
+#   program loops until user exits .. or
 
-? python3 gptcli.py What percentage of people have pets?
+? python3 gptcli.py "What percentage of people have pets?"
 
 #   program exits after printing response
-#   NOTE: parentheses are NOT needed around the query text
+#   NOTE: PARENTHESES ARE NOT needed around the query text
 
 ```
+NOTE: simple bash script makes a smooth command line experience:
 
+```bash
+#!/bin/bash
+
+cd ~/apps/python/projects/GptCLI
+python3 gptcli.py "$@"
+
+```
+---
 
 Besides the query itself, other commands are:  
 -  bye     
