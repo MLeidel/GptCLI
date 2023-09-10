@@ -10,9 +10,10 @@ Execute like:
 
 #   program loops until user exits
 
-? python3 gptcli.py "What percentage of people have pets?"
+? python3 gptcli.py What percentage of people have pets?
 
 #   program exits after printing response
+#   NOTE: parentheses are NOT needed around the query text
 
 ```
 
