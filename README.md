@@ -21,7 +21,7 @@ NOTE: simple bash script makes a smooth command line experience:
 ```bash
 #!/bin/bash
 
-cd ~/apps/python/projects/GptCLI
+cd ~/pathtoAppDirectory
 python3 gptcli.py "$@"
 
 ```
