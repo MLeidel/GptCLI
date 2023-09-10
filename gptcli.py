@@ -78,7 +78,7 @@ Just Hit Enter to EXIT
 while True:
 # check for command-line query
   if len(sys.argv) > 1:
-    querytext = sys.argv[1]
+    querytext = ' '.join(sys.argv[1:])
     openai.api_key = os.environ.get("GPTKEY")
   else:
     cprint(openmsg, 'green', attrs=['bold', 'reverse'])
