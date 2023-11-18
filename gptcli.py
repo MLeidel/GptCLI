@@ -5,60 +5,14 @@ besides the query itself, other commands are:
   bye     or just hit Enter key to exit
   log     print out the log contents to the console
   clear   purge the log contents
+Updated to OpenAI API v1.333, Nov 2023
 '''
-import openai
-import random
 import sys, os
 import datetime
 from termcolor import cprint
+from openai import OpenAI
 
-prompt = ["Sup?",
-"Hey, how’s it going?",
-"Hey, wassup?",
-"Hey, what",
-"Hey, what’s good?",
-"Hey, What’s new?",
-"Hey, what’s the buzz?",
-"Hey, what’s the deal?",
-"Hey, what’s the word?",
-"Heya!",
-"How are you doin’?",
-"Howdy!",
-"Howdy, partner!",
-"Howzit going?",
-"How’s by you?",
-"How’s it all?",
-"How’s it all?",
-"How’s it going?",
-"How’s the day going?",
-"How’s things?",
-"Sup, dude?",
-"Wassssssssssup!",
-"Wassup?",
-"Wasuuuuup",
-"Wazzup?",
-"Whassup?",
-"What’s cookin’?",
-"What’s crackin’?",
-"What’s happening?",
-"What’s shakin’?",
-"What’s the buzz?",
-"What’s the happenin’?",
-"What’s the haps?",
-"What’s the haps?",
-"What’s the scoop?",
-"Whazzup?",
-"Yo, how’s it going?",
-"Yo, wazzup?",
-"Yo, what’s good?",
-"Yo, what’s happenin’",
-"Yo, What’s new?",
-"Yo, what’s new?",
-"Yo, what’s the biz?",
-"Yo, what’s the buzz?",
-"Yo, what’s the deal?",
-"Yo, what’s the haps?",
-"Yo, what’s the word?"]
+MODEL = "gpt-4-1106-preview"
 
 now = datetime.datetime.now()
 
@@ -70,24 +24,33 @@ def printlog(msg, out):
 
 openmsg = '''
 \nWelcome to GPTcli
-Python CLI for OpenAI's GptChat
+Python CLI for OpenAI
 ...Enter your query and then hit Enter...
-Just Hit Enter to EXIT
+
+Enter to EXIT
+Enter 'log' to print log.
+Enter 'clear' to clear the log.
 '''
+
+if len(sys.argv) <= 1:
+  cprint(openmsg, 'yellow', attrs=['reverse'])
+  print(f"Model: {MODEL}")
 
 while True:
 # check for command-line query
+  try:
+      client = OpenAI(
+      api_key = os.environ.get("GPTKEY")  # openai API
+      )
+  except Exception as e:
+      print("Could Not Read Key file\n", "Did you enter your Gpt Key?")
+      sys.exit()
+
   if len(sys.argv) > 1:
     querytext = ' '.join(sys.argv[1:])
-    openai.api_key = os.environ.get("GPTKEY")
   else:
-    cprint(openmsg, 'green', attrs=['bold', 'reverse'])
-    inx = random.randint(0,48)
     print()
-    quest = "gptcli: " + prompt[inx] + " "
-
-    openai.api_key = os.environ.get("GPTKEY")
-
+    quest = "gptcli: " + "Enter prompt or command "
     cprint(quest, 'white', attrs=['bold',])
     querytext = input().strip()
 
@@ -106,14 +69,18 @@ while True:
           print(line, end='')
     continue
 
-  response = openai.ChatCompletion.create(
-      model="gpt-3.5-turbo",
+  response = client.chat.completions.create(
+      # model="gpt-3.5-turbo",
       # model="gpt-4",
-      messages = [{"role": "user", "content" : querytext.strip()}]
+      model=MODEL,
+      messages=[{"role": "system", "content": "You are a helpful assistant."},
+          {"role": "user", "content" : querytext.strip()}
+      ]
   )
-  output = response['choices'][0]['message']['content']
+
+  output = response.choices[0].message.content
   cprint(output, 'green', attrs=['bold',]) # 'reverse'
   printlog(querytext, output)
 
   if len(sys.argv) > 1:
-    break  # exit the while loop
+    break  # exit the while loop (quit)

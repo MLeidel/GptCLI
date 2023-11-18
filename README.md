@@ -1,19 +1,25 @@
 # GptCLI
 
-Console program to access Gpt openAI Completion engine gpt-3.5-turbo
+__Console program (Python) to access Gpt OpenAI Completion engine__  
+Model: gpt-4-1106-preview
 
+Requires: OpenAI >=1.0.0 API module
+
+```bash
+$ pip install termcolor openai
+
+```
 
 Execute like:
 
 ```python
-? python3 gptcli.py
+$ python3 gptcli.py
 
 #   program loops until user exits .. or
 
-? python3 gptcli.py "What percentage of people have pets?"
+$ python3 gptcli.py What percentage of people have pets?
 
 #   program exits after printing response
-#   NOTE: PARENTHESES ARE NOT needed around the query text
 
 ```
 NOTE: simple bash script makes a smooth command line experience:
