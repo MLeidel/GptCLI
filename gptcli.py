@@ -12,7 +12,7 @@ import datetime
 from termcolor import cprint
 from openai import OpenAI
 
-MODEL = "gpt-4-1106-preview"
+MODEL = "gpt-4o"
 
 now = datetime.datetime.now()
 
