@@ -1,16 +1,18 @@
 '''
 gptcli.py
+by Michael Leidel, Jan 12 2023
 besides the query itself, other commands are:
   bye     or just hit Enter key to exit
   log     print out the log contents to the console
   clear   purge the log contents
+Updated to OpenAI API v1.333, Nov 2023
 '''
 import sys, os
 import datetime
 from termcolor import cprint
 from openai import OpenAI
 
-MODEL = "gpt-4.1-nano"
+MODEL = "o1-mini"
 
 now = datetime.datetime.now()
 
@@ -23,9 +25,8 @@ def printlog(msg, out):
 openmsg = '''
 \nWelcome to GPTcli
 Python CLI for OpenAI
-ENV 'GPTKEY' must contain OpenAI Auth Code
-
 ...Enter your query and then hit Enter...
+
 Enter to EXIT
 Enter 'log' to print log.
 Enter 'clear' to clear the log.
@@ -69,6 +70,8 @@ while True:
     continue
 
   response = client.chat.completions.create(
+      # model="gpt-3.5-turbo",
+      # model="gpt-4",
       model=MODEL,
       messages=[{"role": "user", "content": "You are a helpful assistant."},
           {"role": "user", "content" : querytext.strip()}

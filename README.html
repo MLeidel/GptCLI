@@ -1,0 +1,34 @@
+<h1>GptCLI</h1>
+<p><strong>Console program (Python) to access Gpt OpenAI Completion engine</strong><br />
+Model: gpt-4-1106-preview</p>
+<p>Requires: OpenAI &gt;=1.0.0 API module</p>
+<p>```bash
+$ pip install termcolor openai</p>
+<p>```</p>
+<p>Execute like:</p>
+<p>```python
+$ python3 gptcli.py</p>
+<h1>program loops until user exits .. or</h1>
+<p>$ python3 gptcli.py What percentage of people have pets?</p>
+<h1>program exits after printing response</h1>
+<p>```
+NOTE: simple bash script makes a smooth command line experience:</p>
+<p>```bash</p>
+<h1>!/bin/bash</h1>
+<p>cd ~/pathtoAppDirectory
+python3 gptcli.py "$@"</p>
+<h2>```</h2>
+<p>Besides the query itself, other commands are:<br />
+-  bye     </p>
+<blockquote>
+<p>program exits (or just hit Enter key to exit)
+-  log   <br />
+print out the log contents to the console
+-  clear <br />
+purge the log contents</p>
+</blockquote>
+<hr />
+<p>The <em>Gpt API key</em> must be set up in an<br />
+environment variable called 'GPTKEY'</p>
+<hr />
+<p>moduals required: termcolor and openai modules</p>
